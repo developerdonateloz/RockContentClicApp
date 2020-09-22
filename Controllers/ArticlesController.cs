@@ -19,6 +19,7 @@ namespace Project_ClicLikes.Controllers
         }
 
         // GET: api/Articles
+        [RequestRateLimit(Name = "Limit Request Articles", Seconds = 5)]    
         [HttpGet]
         public List<ArticleView> GetArticle()
         {

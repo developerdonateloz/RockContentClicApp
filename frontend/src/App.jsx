@@ -33,18 +33,27 @@ async function postLike(article){
 
 function App() {
   const [listadearticulos,setListaDeArticulos]=React.useState([])
-  const [idarticle,setIdArticle]=React.useState('')
+  // const [idarticle,setIdArticle]=React.useState('')
   const [msjeerror,setMsjeError]=React.useState('')
+  const [msjeerrorL,setMsjeErrorL]=React.useState('')
 
   const Listar=async e=>{
     const r=await getArticulos()
-    setListaDeArticulos(r)
-    setMsjeError('')
-
+    if(r===undefined || r===null)
+    {
+      setMsjeErrorL('Please wait for 5 seconds to clic again to check list of articles')  
+      setMsjeError('')
+    }
+    else
+    {
+      setListaDeArticulos(r)
+      setMsjeErrorL('')
+    }
+    
     return listadearticulos
   }
   const GuardarLike=async (item)=>{
-    setIdArticle(item.id)
+    // setIdArticle(item.id)
     
     const article={
       ArticleId:item.id,
@@ -55,7 +64,8 @@ function App() {
 
     if(t===undefined)
     {
-      setMsjeError('Wait for 5 seconds to clic again')  
+      setMsjeError('Plase wait for 5 seconds to clic Like again')  
+      setMsjeErrorL('')
     }
     else
     {
@@ -88,8 +98,9 @@ function App() {
             ))
           }
           </ul>
+          {msjeerrorL!==''?<div className="alert alert-danger">{msjeerrorL}</div>:<div></div>}
           {
-            msjeerror!=''?<div className="alert alert-danger">{msjeerror}</div>:<div></div>
+            msjeerror!==''?<div className="alert alert-danger">{msjeerror}</div>:<div></div>
           }
         </div>
         <div className="col-4">
