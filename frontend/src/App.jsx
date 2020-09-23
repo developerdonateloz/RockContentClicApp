@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import ButtonLike from './Components/ButtonLike';
 
 async function getArticulos(){
   try{
@@ -73,6 +74,9 @@ function App() {
       setListaDeArticulos(t)  
     }
   }
+  function mifuncion(){
+    alert('saludos virtuales')
+  }
 
   return (
     <div className="container">
@@ -93,7 +97,7 @@ function App() {
             listadearticulos.map((item,id)=>(
               <li key={item.id} className="list-group-item">
               <span className="lead">{item.content}</span>
-            <button className="btn btn-primary btn-sm float-right" onClick={()=>GuardarLike(item)}>{item.numberLikes} likes</button>
+              <ButtonLike dandoclic={GuardarLike} dandoitem={item} n={item.numberLikes}></ButtonLike>
             </li>
             ))
           }
@@ -104,7 +108,7 @@ function App() {
           }
         </div>
         <div className="col-4">
-        
+              
         </div>
       </div>
     </div>
